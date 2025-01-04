@@ -1,0 +1,38 @@
+{
+  "name": "discord.js-heroku",
+  "version": "1.0.0",
+  "description": "An in-depth guide on deploying your Discord.js bot on Heroku",
+  "main": "index.js",
+  "engines": {
+    "node": "*",
+    "npm": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/synicalsyntax/discord.js-heroku.git"
+  },
+  "keywords": [
+    "heroku",
+    "discord.js"
+  ],
+  "author": "synicalsyntax",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/synicalsyntax/discord.js-heroku/issues"
+  },
+  "homepage": "https://github.com/synicalsyntax/discord.js-heroku#readme",
+  "dependencies": {
+    "better-sqlite3": "11.7.0",
+    "bible-passage-reference-parser": "^2.0.1",
+    "discord.js": "14.17.2",
+    "dotenv": "^16.4.7",
+    "moment": "2.30.1",
+    "natural": "8.0.1",
+    "turndown": "7.2.0",
+    "xml2js": "0.6.2"
+  }
+}
