@@ -14,6 +14,7 @@ const config = {
     'Ajudando pessoal como posso',
     'Jogando tarrafa no mar',
     'Grelhando taínhas',
+    'Assistindo um filme',
   ],
   COMMANDS: `Comandos do bot: ${PREFIX} help, info.`,
 };

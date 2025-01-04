@@ -34,7 +34,10 @@ const client = new Discord.Client({
 client.on('ready', () => {
   client.user.setPresence({
     activities: [
-      { name: bch.config.ACTIVITIES[Math.floor(Math.random() * 4)], type: Discord.ActivityType.Watching },
+      {
+        name: bch.config.ACTIVITIES[Math.floor(Math.random() * 4)],
+        type: Discord.ActivityType.Watching,
+      },
     ],
     status: 'dnd',
   });
