@@ -1,6 +1,27 @@
+const Discord = require('discord.js');
+const winston = require("winston");
+const hexutil = require('./ColorHexUtil');
+const bch = require('./BotCommandsHelper');
+
 require('dotenv').config();
 
-const Discord = require('discord.js');
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  defaultMeta: { service: 'user-service' },
+  transports: [
+    //
+    // - Write all logs with importance level of `error` or higher to `error.log`
+    //   (i.e., error, fatal, but not other levels)
+    //
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    //
+    // - Write all logs with importance level of `info` or higher to `combined.log`
+    //   (i.e., fatal, error, warn, and info, but not trace)
+    //
+    new winston.transports.File({ filename: 'combined.log' }),
+  ],
+});
 
 const client = new Discord.Client({
   intents: [
@@ -10,25 +31,21 @@ const client = new Discord.Client({
   ],
 });
 
-const hexutil = require('./ColorHexUtil');
-
-const bch = require('./BotCommandsHelper');
-
 client.on('ready', () => {
   client.user.setActivity(bch.config.ACTIVITY, { type: 'WATCHING' });
 });
 
 client.on('messageCreate', (msg) => {
-  if (!msg.content.startsWith(bch.config.PREFIX)) return;
+  if (!msg.content.startsWith(bch.config.PREFIX)) return logger.error("Wrong prefix");;
 
   const command = msg.content.split(' ')[0].slice(1); // remove prefix
   const extraArgs = msg.content.split(' ').slice(1);
   console.log(command, extraArgs);
 
   const lang = extraArgs[0] ? extraArgs[0] : 'pt';
-  if (command === 'help') return msg.reply(bch.config.HELP[lang]);
-  else if (command === 'info') return msg.reply(bch.config.INFO[lang]);
-  else if (command === 'c') return msg.reply(bch.config.COMMANDS);
+  if (command === 'help') return buildDiscordRichEmbed(bch.config.HELP[lang]);
+  else if (command === 'info') return buildDiscordRichEmbed(bch.config.INFO[lang]);
+  else if (command === 'c') return buildDiscordRichEmbed(bch.config.COMMANDS);
   else return;
 });
 
