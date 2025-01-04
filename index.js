@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const winston = require("winston");
+const winston = require('winston');
 const hexutil = require('./ColorHexUtil');
 const bch = require('./BotCommandsHelper');
 
@@ -35,22 +35,48 @@ client.on('ready', () => {
   client.user.setActivity(bch.config.ACTIVITY, { type: 'WATCHING' });
 });
 
+const handleHelp = (extraArgs) => {
+  const lang = extraArgs.length ? extraArgs[0] : 'pt';
+
+  return bch.config.HELP[lang];
+};
+
+const handleInfo = (extraArgs) => {
+  const lang = extraArgs.length ? extraArgs[0] : 'pt';
+
+  return bch.config.INFO[lang];
+};
+
+const handleLc = (extraArgs) => {
+  const lang = extraArgs.length ? extraArgs[0] : 'pt';
+
+  return bch.config.COMMANDS;
+};
+
+commandsManager = {
+  help: handleHelp,
+  info: handleInfo,
+  lc: handleLc,
+};
+
 client.on('messageCreate', (msg) => {
-  if (!msg.content.startsWith(bch.config.PREFIX)) return logger.error("Wrong prefix");;
+  if (!msg.content.startsWith(bch.config.PREFIX))
+    return logger.error('Wrong prefix');
 
   const command = msg.content.split(' ')[0].slice(1); // remove prefix
   const extraArgs = msg.content.split(' ').slice(1);
   console.log(command, extraArgs);
 
-  const lang = extraArgs[0] ? extraArgs[0] : 'pt';
-  if (command === 'help') return buildDiscordRichEmbed(bch.config.HELP[lang]);
-  else if (command === 'info') return buildDiscordRichEmbed(bch.config.INFO[lang]);
-  else if (command === 'c') return buildDiscordRichEmbed(bch.config.COMMANDS);
-  else return;
+  if (!command) return logger.error('No command found');
+  const handlerFunc = commandsManager[command];
+  const replyMsg = handlerFunc(extraArgs);
+  if (!replyMsg) return logger.error('No msg');
+
+  msg.reply(replyMsg);
 });
 
 function buildDiscordRichEmbed(text) {
-  let embed = new Discord.MessageEmbed();
+  let embed = new Discord.EmbedBuilder();
   embed.setColor(hexutil.generateHexColor());
   if (text.length < 2048) {
     embed.setDescription(text);
