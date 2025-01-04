@@ -1,7 +1,7 @@
 {
-  "name": "discord.js-heroku",
+  "name": "bot-thc",
   "version": "1.0.0",
-  "description": "An in-depth guide on deploying your Discord.js bot on Heroku",
+  "description": "tarrafa bot",
   "main": "index.js",
   "engines": {
     "node": "*",
@@ -16,7 +16,6 @@
     "url": "git+https://github.com/synicalsyntax/discord.js-heroku.git"
   },
   "keywords": [
-    "heroku",
     "discord.js"
   ],
   "author": "synicalsyntax",

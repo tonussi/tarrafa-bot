@@ -1,7 +1,7 @@
-const PREFIX = ".";
+const PREFIX = "!";
 
 const config = {
-  PREFIX,
+  PREFIX: PREFIX,
   HELP: {
     en: "Tarrafa Hacker Space - Bot (english)",
     pt: "Tarrafa Hacker Space - Bot (portuguese)",
@@ -10,7 +10,7 @@ const config = {
     en: "Tarrafa Hacker Space - Bot (english)",
     pt: "Tarrafa Hacker Space - Bot (portuguese)",
   },
-  ACTIVITY: "Tarrafa Hacker Space",
+  ACTIVITY: "Helping others anyway I can",
   COMMANDS: `Comandos do bot: ${PREFIX} help, info.`,
 };
 
