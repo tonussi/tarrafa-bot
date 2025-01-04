@@ -32,7 +32,12 @@ const client = new Discord.Client({
 });
 
 client.on('ready', () => {
-  client.user.setActivity(bch.config.ACTIVITY, { type: 'WATCHING' });
+  client.user.setPresence({
+    activities: [
+      { name: bch.config.ACTIVITIES[Math.floor(Math.random() * 4)], type: Discord.ActivityType.Watching },
+    ],
+    status: 'dnd',
+  });
 });
 
 client.on('messageCreate', (msg) => {
