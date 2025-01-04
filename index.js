@@ -36,7 +36,7 @@ client.on('ready', () => {
     activities: [
       {
         name: bch.config.ACTIVITIES[Math.floor(Math.random() * 4)],
-        type: Discord.ActivityType.Watching,
+        type: Discord.ActivityType.Custom,
       },
     ],
     status: 'dnd',
