@@ -41,7 +41,7 @@ client.on('messageCreate', (msg) => {
 
   const command = msg.content.split(' ')[0].slice(1); // remove prefix
   const extraArgs = msg.content.split(' ').slice(1);
-  console.log(command, extraArgs);
+  logger.info({ command, extraArgs });
 
   if (!command) return logger.error('No command found');
   const handlerFunc = commandsManager.actions[command];
