@@ -5,6 +5,8 @@ const commandsManager = require('./CommandsManager');
 
 require('dotenv').config();
 
+const RANDOM_ACTIVITY = Math.floor(Math.random() * 4);
+
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
@@ -35,7 +37,7 @@ client.on('ready', () => {
   client.user.setPresence({
     activities: [
       {
-        name: bch.config.ACTIVITIES[Math.floor(Math.random() * 4)],
+        name: bch.config.ACTIVITIES[RANDOM_ACTIVITY],
         type: Discord.ActivityType.Custom,
       },
     ],
