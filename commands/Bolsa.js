@@ -16,7 +16,7 @@ const getPrice = async (extraArgs, lang) => {
   if (!quotaData)
     return 'Not returning results - b3api.me not working well at this time.';
 
-  return quotaData.price;
+  return `Preço ${ticker}: ${quotaData.price}`;
 };
 
 module.exports = {
