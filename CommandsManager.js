@@ -1,27 +1,29 @@
 const bch = require('./BotCommandsHelper');
 
-const handleHelp = (extraArgs) => {
-  const lang = extraArgs.length ? extraArgs[0] : 'pt';
-
+const handleHelp = (extraArgs, lang) => {
   return bch.config.HELP[lang];
 };
 
-const handleInfo = (extraArgs) => {
-  const lang = extraArgs.length ? extraArgs[0] : 'pt';
-
+const handleInfo = (extraArgs, lang) => {
   return bch.config.INFO[lang];
 };
 
-const handleLc = (extraArgs) => {
-  const lang = extraArgs.length ? extraArgs[0] : 'pt';
-
+const handleLc = (extraArgs, lang) => {
   return bch.config.COMMANDS;
 };
 
-actions = {
+const actions = {
   help: handleHelp,
   info: handleInfo,
   lc: handleLc,
 };
 
-module.exports.actions = actions;
+const perform = async (command, extraArgs) => {
+  const lang = extraArgs.length ? extraArgs[0] : 'pt';
+
+  if (!actions[command]) return;
+
+  return await actions[command](extraArgs, lang);
+};
+
+module.exports.perform = perform;

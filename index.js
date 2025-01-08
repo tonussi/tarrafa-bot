@@ -45,7 +45,7 @@ client.on('ready', () => {
   });
 });
 
-client.on('messageCreate', (msg) => {
+client.on('messageCreate', async (msg) => {
   if (!msg.content.startsWith(bch.config.PREFIX))
     return logger.error('Wrong prefix');
 
@@ -54,8 +54,9 @@ client.on('messageCreate', (msg) => {
   logger.info({ command, extraArgs });
 
   if (!command) return logger.error('No command found');
-  const handlerFunc = commandsManager.actions[command];
-  const replyMsg = handlerFunc(extraArgs);
+
+  const replyMsg = await commandsManager.perform(command, extraArgs);
+
   if (!replyMsg) return logger.error('No msg');
 
   msg.reply(replyMsg);
