@@ -13,7 +13,9 @@ const perform = async (command, extraArgs) => {
 
   if (!actions[command]) return;
 
-  return await actions[command](extraArgs, lang);
+  const res = await actions[command](extraArgs, lang);
+
+  return res;
 };
 
 module.exports.perform = perform;

@@ -1,9 +1,22 @@
-const bovespa = require('bovespa')();
+const getTickerQuota = async (ticker) => {
+  if (!ticker) return;
 
-const getPrice = (extraArgs, lang) => {
-  bovespa(extraArgs[0]).then((values) => {
-    console.log(values);
-  });
+  const url = `https://b3api.me/api/quote/${ticker}`;
+
+  const response = await fetch(url);
+  const data = await response.json();
+
+  return data;
+};
+
+const getPrice = async (extraArgs, lang) => {
+  const ticker = extraArgs[0];
+
+  const quotaData = await getTickerQuota(ticker);
+  if (!quotaData)
+    return 'Not returning results - b3api.me not working well at this time.';
+
+  return quotaData.price;
 };
 
 module.exports = {
