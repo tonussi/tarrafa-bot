@@ -1,21 +1,11 @@
-const bch = require('./BotCommandsHelper');
-
-const handleHelp = (extraArgs, lang) => {
-  return bch.config.HELP[lang];
-};
-
-const handleInfo = (extraArgs, lang) => {
-  return bch.config.INFO[lang];
-};
-
-const handleLc = (extraArgs, lang) => {
-  return bch.config.COMMANDS;
-};
+const { handleHelp, handleInfo, handleLc } = require('./commands/Basics');
+const { getPrice } = require('./commands/Bolsa');
 
 const actions = {
-  help: handleHelp,
-  info: handleInfo,
+  h: handleHelp,
+  i: handleInfo,
   lc: handleLc,
+  gp: getPrice,
 };
 
 const perform = async (command, extraArgs) => {
